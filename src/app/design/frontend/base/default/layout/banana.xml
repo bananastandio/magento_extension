@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magestore
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category    Magestore
+ * @package     Magestore_Bannerslider
+ * @copyright   Copyright (c) 2012 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ */
+-->
+<layout version="0.1.0">
+    <banana_footer>
+        <reference name="before_body_end" >
+            <block type="core/text_list" name="bananastand.footer">
+                <block type="banana/footer" name="bananastand.footer.configure" template="banana/footer/configure.phtml"></block>
+            </block>
+        </reference>
+    </banana_footer>
+
+    <catalog_product_view>
+        <update handle="banana_footer" />
+        <reference name="bananastand.footer" >
+            <block type="banana/footer_product_view" name="bananastand.footer.product.view" template="banana/footer/product/view.phtml"></block>
+        </reference>
+    </catalog_product_view>
+    
+    <catalog_category_view>
+        <update handle="banana_footer" />
+    </catalog_category_view>
+</layout>

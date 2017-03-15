@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Wf_Bananastand>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends></depends>
+        </Wf_Bananastand>
+    </modules>
+</config>
