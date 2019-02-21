@@ -53,7 +53,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_PUBLIC_KEY'])) {
             return $_ENV['BANANA_PUBLIC_KEY'];
         }
-        return Mage::getStoreConfig('banana/general/public_key');
+        return Mage::getStoreConfig('banana/banana_group/public_key');
     }
 
     /**
@@ -68,7 +68,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_SECRET_KEY'])) {
             return $_ENV['BANANA_SECRET_KEY'];
         }
-        return Mage::getStoreConfig('banana/general/secret_key');
+        return Mage::getStoreConfig('banana/banana_group/secret_key');
     }
 
     public function isEnabled()
@@ -99,7 +99,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * The URL path to the API (https). For example: https://api.bananastand.io/api/v1
+     * The URL path to the API (https). For example: https://api.fera.ai/api/v1
      * @return string
      */
     public function getApiUrl()
@@ -110,11 +110,11 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_API_URL'])) {
             return $_ENV['BANANA_API_URL'];
         }
-        return "https://app.bananastand.io/api/v1";
+        return "https://app.fera.ai/api/v1/";
     }
 
     /**
-     * The URL to the javascript file on the banana stand CDN. For example: https://cdn.bananastand.io/js/bananastand.js
+     * The URL to the javascript file on the banana stand CDN. For example: https://cdn.fera.ai/js/bananastand.js
      * @return string
      */
     public function getJsUrl()
@@ -125,7 +125,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_JS_URL'])) {
             return $_ENV['BANANA_JS_URL'];
         }
-        return "https://cdn.bananastand.io/js/bananastand.js";
+        return "https://cdn.fera.ai/js/bananastand.js";
     }
 
     /**
@@ -143,5 +143,85 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag('banana/general/debug_mode');
     }
 
+    /**
+     * @return json - The contents of the cart as a json string.
+     */
+    public function getCartJson()
+    {
+        $cartItems = Mage::getModel('checkout/cart')->getItems();
+        if (empty($cartItems)) {
+          return "[]";
+        }
+        return json_encode($cartItems->getData());
+    }
 
+    /**
+     * Format a mage order object into JSON for sending to VIA js api
+     * @param Mage_Sales_Model_Order $order
+     * @return JSON
+     */
+    public function jsonifyOrder($order)
+    {
+        $items = array();
+
+        foreach ($order->getAllItems() as $item) {
+            $product = $item->getProduct();
+            $items[] = array(
+                'name'     => $item->getName(),
+                'total'    => $item->getPrice(),
+                'quantity' => $item->getQtyOrdered(),
+                'product'  => array(
+                    'id'            => $product->getId(),
+                    'name'          => $product->getName(),
+                    'status'        => $product->getStatus(),
+                    'in_stock'      => $product->isInStock(),
+                    'url'           => $product->getProductUrl(),
+                    'thumbnail_url' => $product->getThumbnailUrl(),
+                    'platform_data' => $product->getData()
+                ),
+            );
+        }
+
+        $customer_id = $order->getCustomerId();
+        $customer;
+        if (!empty($customer_id)) {
+            $customerData = Mage::getModel('customer/customer')->load($customer_id);
+            $addressObj = $customerData->getPrimaryShippingAddress();
+            $address;
+            if (!empty($addressObj)) {
+                $address = $addressObj->getData();
+            }
+            $customer = array(
+                'id'            => $customer_id,
+                'first_name'    => $customerData->getFirstname(),
+                'last_name'     => $customerData->getLastname(),
+                'email'         => $customerData->getEmail(),
+                'address'       => $address
+            );
+        }
+
+        $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+        $total = $order->getGrandTotal();
+        $totalUsd = Mage::helper('directory')->currencyConvert($total, $currency_code, 'USD');
+        $timeNow = Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s');
+
+        $orderData = array(
+            'order_id'      => $order->getId(),
+            'number'        => $order->getIncrementId(),
+
+            'total'         => $total,
+            'total_usd'     => $totalUsd,
+
+            'created_at'    => $timeNow,
+            'modified_at'   => $timeNow,
+
+            'line_items'    => $items,
+
+            'platform_data' => $order->getData(),
+
+            'customer'      => $customer
+        );
+
+        return json_encode($orderData);
+    }
 }
