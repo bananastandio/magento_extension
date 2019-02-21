@@ -110,7 +110,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_API_URL'])) {
             return $_ENV['BANANA_API_URL'];
         }
-        return "https://app.fera.ai/api/v1/";
+        return "https://app.fera.ai/api/v1";
     }
 
     /**
