@@ -156,72 +156,12 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Format a mage order object into JSON for sending to VIA js api
-     * @param Mage_Sales_Model_Order $order
-     * @return JSON
+     * @return string - JS to trigger debug mode if required.
      */
-    public function jsonifyOrder($order)
-    {
-        $items = array();
-
-        foreach ($order->getAllItems() as $item) {
-            $product = $item->getProduct();
-            $items[] = array(
-                'name'     => $item->getName(),
-                'total'    => $item->getPrice(),
-                'quantity' => $item->getQtyOrdered(),
-                'product'  => array(
-                    'id'            => $product->getId(),
-                    'name'          => $product->getName(),
-                    'status'        => $product->getStatus(),
-                    'in_stock'      => $product->isInStock(),
-                    'url'           => $product->getProductUrl(),
-                    'thumbnail_url' => $product->getThumbnailUrl(),
-                    'platform_data' => $product->getData()
-                ),
-            );
+    public function getDebugJs() {
+        if ($this->isDebugMode()) {
+            return "window.__bsioDebugMode = true;";
         }
-
-        $customer_id = $order->getCustomerId();
-        $customer;
-        if (!empty($customer_id)) {
-            $customerData = Mage::getModel('customer/customer')->load($customer_id);
-            $addressObj = $customerData->getPrimaryShippingAddress();
-            $address;
-            if (!empty($addressObj)) {
-                $address = $addressObj->getData();
-            }
-            $customer = array(
-                'id'            => $customer_id,
-                'first_name'    => $customerData->getFirstname(),
-                'last_name'     => $customerData->getLastname(),
-                'email'         => $customerData->getEmail(),
-                'address'       => $address
-            );
-        }
-
-        $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
-        $total = $order->getGrandTotal();
-        $totalUsd = Mage::helper('directory')->currencyConvert($total, $currency_code, 'USD');
-        $timeNow = Mage::getModel('core/date')->gmtDate('Y-m-d H:i:s');
-
-        $orderData = array(
-            'order_id'      => $order->getId(),
-            'number'        => $order->getIncrementId(),
-
-            'total'         => $total,
-            'total_usd'     => $totalUsd,
-
-            'created_at'    => $timeNow,
-            'modified_at'   => $timeNow,
-
-            'line_items'    => $items,
-
-            'platform_data' => $order->getData(),
-
-            'customer'      => $customer
-        );
-
-        return json_encode($orderData);
+        return "";
     }
 }

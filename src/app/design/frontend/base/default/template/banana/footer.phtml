@@ -1,6 +1,7 @@
-<!-- // BEGIN // Banana Stand Integration code. See https://www.fera.ai for more information. -->
+<!--// BEGIN Fera.ai Integration Code //-->
     <script>
-      window.__bsio = window.__bsio || []; window.__bsioDebugMode = true;
+      window.__bsio = window.__bsio || [];
+      <?php echo Mage::helper('banana')->getDebugJs(); ?>
       window.__bsio.push({
         action: "configure",
         data: { store_pk: "<?php echo Mage::helper('banana')->getPublicKey(); ?>", api_url: "<?php echo Mage::helper('banana')->getApiUrl(); ?>" }
@@ -12,4 +13,4 @@
     <?php echo $this->getChildHtml('bananastand.footer.product.view'); ?>
     <?php echo $this->getChildHtml('bananastand.footer.checkout.success'); ?>
     <script async type="application/javascript" src="<?php echo Mage::helper('banana')->getJsUrl(); ?>"></script>
-<!--// END Banana Stand integration code. //-->
+<!--// END Fera.ai Integration Code //-->

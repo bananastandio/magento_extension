@@ -2,7 +2,7 @@
 <config>
   <tabs>
     <banana translate="label" module="banana">
-      <label>Fera Ai</label>
+      <label>Fera.ai</label>
       <sort_order>100</sort_order>
     </banana>
   </tabs>
@@ -40,7 +40,7 @@
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
-              <comment>You can find your API keys at https://app.fera.ai/store/settings</comment>
+              <comment>You can find your API keys at https://app.fera.ai/store/settings?tab=api</comment>
             </secret_key>
           </fields>
         </banana_group>
