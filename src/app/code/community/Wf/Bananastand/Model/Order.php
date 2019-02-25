@@ -24,6 +24,7 @@ class Wf_Bananastand_Model_Order extends Varien_Object
      */
     public function getJson()
     {
+        $order = $this->order;
         $items = array();
 
         foreach ($order->getAllItems() as $item) {

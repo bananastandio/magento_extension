@@ -1,7 +1,7 @@
 <!--// BEGIN Fera.ai Integration Code //-->
     <script>
       window.__bsio = window.__bsio || [];
-      <?php echo Mage::helper('banana')->getDebugJs(); ?>
+      <?php echo Mage::helper('banana')->getDebugJs(), PHP_EOL;?>
       window.__bsio.push({
         action: "configure",
         data: { store_pk: "<?php echo Mage::helper('banana')->getPublicKey(); ?>", api_url: "<?php echo Mage::helper('banana')->getApiUrl(); ?>" }
