@@ -53,7 +53,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_PUBLIC_KEY'])) {
             return $_ENV['BANANA_PUBLIC_KEY'];
         }
-        return Mage::getStoreConfig('banana/general/public_key');
+        return Mage::getStoreConfig('banana/banana_group/public_key');
     }
 
     /**
@@ -68,7 +68,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_SECRET_KEY'])) {
             return $_ENV['BANANA_SECRET_KEY'];
         }
-        return Mage::getStoreConfig('banana/general/secret_key');
+        return Mage::getStoreConfig('banana/banana_group/secret_key');
     }
 
     public function isEnabled()
@@ -99,7 +99,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * The URL path to the API (https). For example: https://api.bananastand.io/api/v1
+     * The URL path to the API (https). For example: https://api.fera.ai/api/v1
      * @return string
      */
     public function getApiUrl()
@@ -110,11 +110,11 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_API_URL'])) {
             return $_ENV['BANANA_API_URL'];
         }
-        return "https://app.bananastand.io/api/v1";
+        return "https://app.fera.ai/api/v1";
     }
 
     /**
-     * The URL to the javascript file on the banana stand CDN. For example: https://cdn.bananastand.io/js/bananastand.js
+     * The URL to the javascript file on the banana stand CDN. For example: https://cdn.fera.ai/js/bananastand.js
      * @return string
      */
     public function getJsUrl()
@@ -125,7 +125,7 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['BANANA_JS_URL'])) {
             return $_ENV['BANANA_JS_URL'];
         }
-        return "https://cdn.bananastand.io/js/bananastand.js";
+        return "https://cdn.fera.ai/js/bananastand.js";
     }
 
     /**
@@ -143,5 +143,25 @@ class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag('banana/general/debug_mode');
     }
 
+    /**
+     * @return json - The contents of the cart as a json string.
+     */
+    public function getCartJson()
+    {
+        $cartItems = Mage::getModel('checkout/cart')->getItems();
+        if (empty($cartItems)) {
+          return "[]";
+        }
+        return json_encode($cartItems->getData());
+    }
 
+    /**
+     * @return string - JS to trigger debug mode if required.
+     */
+    public function getDebugJs() {
+        if ($this->isDebugMode()) {
+            return "window.__bsioDebugMode = true;";
+        }
+        return "";
+    }
 }
