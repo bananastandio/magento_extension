@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="1.1.0">
+    <fera_ai_footer>
+        <reference name="before_body_end" >
+            <block type="core/template" name="fera_ai.footer" template="feraai/footer.phtml"></block>
+        </reference>
+    </fera_ai_footer>
+
+    <catalog_product_view>
+        <reference name="fera_ai.footer" >
+            <block type="fera_ai/footer_product_view" name="fera_ai.footer.product.view" template="feraai/footer/product/view.phtml"></block>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_multishipping_success>
+        <reference name="fera_ai.footer" >
+            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="feraai/footer/checkout/success.phtml"></block>
+        </reference>
+    </checkout_multishipping_success>
+
+    <checkout_onepage_success>
+        <reference name="fera_ai.footer" >
+            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="feraai/footer/checkout/success.phtml"></block>
+        </reference>
+    </checkout_onepage_success>
+
+    <default>
+        <update handle="fera_ai_footer" />
+    </default>
+</layout>

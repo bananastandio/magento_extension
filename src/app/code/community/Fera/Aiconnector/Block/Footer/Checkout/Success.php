@@ -11,7 +11,7 @@ class Fera_Aiconnector_Block_Footer_Checkout_Success extends Mage_Core_Block_Tem
     {
         $order = Mage::getSingleton('sales/order');
         $order->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
-        $feraOrder = Mage::getModel('aiconnector/order')->loadFromMageOrder($order);
+        $feraOrder = Mage::getModel('fera_ai/order')->loadFromMageOrder($order);
         return $feraOrder->getJson(); // returns JSON string of data ready to be sent to Fera API
     }
 }

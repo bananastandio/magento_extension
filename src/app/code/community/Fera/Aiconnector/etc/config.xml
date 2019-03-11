@@ -7,27 +7,27 @@
     </modules>
     <global>
         <models>
-            <aiconnector>
+            <fera_ai>
                 <class>Fera_Aiconnector_Model</class>
-            </aiconnector>
+            </fera_ai>
         </models>
         <blocks>
-            <aiconnector>
+            <fera_ai>
                 <class>Fera_Aiconnector_Block</class>
-            </aiconnector>
+            </fera_ai>
         </blocks>
         <helpers>
-            <aiconnector>
+            <fera_ai>
                 <class>Fera_Aiconnector_Helper</class>
-            </aiconnector>
+            </fera_ai>
         </helpers>
     </global>
     <frontend>
         <layout>
             <updates>
-                <aiconnector>
-                    <file>aiconnector.xml</file>
-                </aiconnector>
+                <fera_ai>
+                    <file>feraai.xml</file>
+                </fera_ai>
             </updates>
         </layout>
     </frontend>
@@ -40,9 +40,9 @@
                             <children>
                                 <config>
                                     <children>
-                                        <aiconnector>
+                                        <fera_ai>
                                             <title>Fera Settings</title>
-                                        </aiconnector>
+                                        </fera_ai>
                                     </children>
                                 </config>
                             </children>

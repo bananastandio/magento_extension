@@ -1,5 +1,5 @@
 # Fera.ai Magento 1 Extension
-This extension makes it easy to use Fera.ai to offer customers a live shopping experience in your product pages. To learn more about Banana Stand go to https://www.fera.ai
+This extension makes it easy to use Fera.ai to offer customers a live shopping experience in your product pages. To learn more about Fera go to https://www.fera.ai
 
 
 ## Installation
@@ -18,4 +18,4 @@ You can also set your configuration settings via your environment or server vari
 Go to https://app.fera.ai/skills to customize your experience!
 
 ## Help
-If you're seeing this repo you're probably a trusted developer - so just feel free to email help@fera.ai with any questions.
+If you're seeing this repo you're probably a trusted developer - so just feel free to email help a-t fera dot ai with any questions.
