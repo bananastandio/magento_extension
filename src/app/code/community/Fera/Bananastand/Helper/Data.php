@@ -1,6 +1,6 @@
 <?php
 
-class Wf_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
+class Fera_Bananastand_Helper_Data extends Mage_Core_Helper_Abstract
 {
     /**
      * Write to the banana stand log file

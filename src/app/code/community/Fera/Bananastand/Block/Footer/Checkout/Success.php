@@ -1,6 +1,6 @@
 <?php
 
-class Wf_Bananastand_Block_Footer_Checkout_Success extends Mage_Core_Block_Template
+class Fera_Bananastand_Block_Footer_Checkout_Success extends Mage_Core_Block_Template
 {
 
     /**

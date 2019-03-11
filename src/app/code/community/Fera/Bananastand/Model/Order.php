@@ -2,7 +2,7 @@
  /**
  * This client handles the creation of order JSON for sending to Fera
  */
-class Wf_Bananastand_Model_Order extends Varien_Object
+class Fera_Bananastand_Model_Order extends Varien_Object
 {
 
     protected $order;
