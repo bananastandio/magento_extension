@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Wf_Bananastand>
+        <Fera_Aiconnector>
             <active>true</active>
             <codePool>community</codePool>
             <depends></depends>
-        </Wf_Bananastand>
+        </Fera_Aiconnector>
     </modules>
 </config>

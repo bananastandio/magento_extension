@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <config>
   <tabs>
-    <banana translate="label" module="banana">
+    <fera_ai translate="label" module="fera_ai">
       <label>Fera.ai</label>
       <sort_order>100</sort_order>
-    </banana>
+    </fera_ai>
   </tabs>
   <sections>
-    <banana translate="label" module="banana">
+    <fera_ai translate="label" module="fera_ai">
       <label>Fera Settings</label>
-      <tab>banana</tab>
+      <tab>fera_ai</tab>
       <sort_order>1000</sort_order>
       <show_in_default>1</show_in_default>
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>
 
       <groups>
-        <banana_group translate="label" module="banana">
+        <fera_ai_group translate="label" module="fera_ai">
           <label>API Keys</label>
           <frontend_type>text</frontend_type>
           <sort_order>1000</sort_order>
@@ -43,8 +43,8 @@
               <comment>You can find your API keys at https://app.fera.ai/store/settings?tab=api</comment>
             </secret_key>
           </fields>
-        </banana_group>
+        </fera_ai_group>
       </groups>
-    </banana>
+    </fera_ai>
   </sections>
 </config>

@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Wf_Bananastand>
+        <Fera_Aiconnector>
             <version>1.1.0</version>
-        </Wf_Bananastand>
+        </Fera_Aiconnector>
     </modules>
     <global>
         <models>
-            <banana>
-                <class>Wf_Bananastand_Model</class>
-            </banana>
+            <fera_ai>
+                <class>Fera_Aiconnector_Model</class>
+            </fera_ai>
         </models>
         <blocks>
-            <banana>
-                <class>Wf_Bananastand_Block</class>
-            </banana>
+            <fera_ai>
+                <class>Fera_Aiconnector_Block</class>
+            </fera_ai>
         </blocks>
         <helpers>
-            <banana>
-                <class>Wf_Bananastand_Helper</class>
-            </banana>
+            <fera_ai>
+                <class>Fera_Aiconnector_Helper</class>
+            </fera_ai>
         </helpers>
     </global>
     <frontend>
         <layout>
             <updates>
-                <banana>
-                    <file>banana.xml</file>
-                </banana>
+                <fera_ai>
+                    <file>feraai.xml</file>
+                </fera_ai>
             </updates>
         </layout>
     </frontend>
@@ -40,9 +40,9 @@
                             <children>
                                 <config>
                                     <children>
-                                        <banana>
+                                        <fera_ai>
                                             <title>Fera Settings</title>
-                                        </banana>
+                                        </fera_ai>
                                     </children>
                                 </config>
                             </children>

@@ -1,6 +1,6 @@
 <?php
 
-class Wf_Bananastand_Block_Footer_Product_View extends Mage_Core_Block_Template
+class Fera_Aiconnector_Block_Footer_Product_View extends Mage_Core_Block_Template
 {
     /**
      * Retrieve current product model
