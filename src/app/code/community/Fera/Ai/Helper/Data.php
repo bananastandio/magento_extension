@@ -42,6 +42,14 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
     }
     
     /**
+     * @return     String Version of the extension (x.x.x)
+     */ 
+    public function getVersion()
+    {
+        return ((array)Mage::getConfig()->getNode('modules/Fera_Ai/version'))[0];
+    }
+    
+    /**
      * Fera Ai public key either from the store config or the environment files
      * @return string
      */
