@@ -46,7 +46,8 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
      */ 
     public function getVersion()
     {
-        return ((array)Mage::getConfig()->getNode('modules/Fera_Ai/version'))[0];
+        $cfg = (array) Mage::getConfig()->getNode('modules/Fera_Ai/version');
+        return $cfg[0];
     }
     
     /**
