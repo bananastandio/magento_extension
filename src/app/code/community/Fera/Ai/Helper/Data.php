@@ -1,6 +1,6 @@
 <?php
 
-class Fera_Aiconnector_Helper_Data extends Mage_Core_Helper_Abstract
+class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
 {
     /**
      * Write to the Fera.ai log file
@@ -110,7 +110,12 @@ class Fera_Aiconnector_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['FERA_AI_API_URL'])) {
             return $_ENV['FERA_AI_API_URL'];
         }
-        return "https://app.fera.ai/api/v1";
+
+        $urlFromConfig = Mage::getStoreConfig('fera_ai/fera_ai_group/api_url');
+        if ($urlFromConfig) {
+            return $urlFromConfig;
+        }
+        return "https://app.fera.ai/api/v2";
     }
 
     /**
@@ -125,7 +130,13 @@ class Fera_Aiconnector_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_ENV['FERA_AI_JS_URL'])) {
             return $_ENV['FERA_AI_JS_URL'];
         }
-        return "https://cdn.fera.ai/js/bananastand.js";
+        
+        $urlFromConfig = Mage::getStoreConfig('fera_ai/fera_ai_group/js_url');
+        if ($urlFromConfig) {
+            return $urlFromConfig;
+        }
+
+        return "https://cdn.fera.ai/js/fera.js";
     }
 
     /**
@@ -143,16 +154,63 @@ class Fera_Aiconnector_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::getStoreConfigFlag('fera_ai/general/debug_mode');
     }
 
+    public function serializeQuoteItems($items)
+    {
+        $configurableItems = [];
+        $itemMap = [];
+        $childItems = [];
+        foreach ($items as $cartItem) {
+
+            if ($cartItem->getParentItemId()) {
+                $childItems[] = $cartItem;
+            } else {
+                $itemMap[$cartItem->getId()] = [
+                    'product_id' => $cartItem->getProductId(),
+                    'price' => $cartItem->getPrice(),
+                    'total' => $cartItem->getRowTotal(),
+                    'name' => $cartItem->getName()
+                ];
+                if ($cartItem->getProductType() == 'configurable') {
+                    $configurableItems[$cartItem->getId()] = $itemMap[$cartItem->getId()];
+                }
+            }
+
+        }
+
+        foreach ($childItems as $cartItem) {
+            if ($configurableItems[$cartItem->getParentItemId()]) {
+                // product is configurable
+                $itemMap[$cartItem->getParentItemId()]['name'] = $cartItem->getName();
+                $itemMap[$cartItem->getParentItemId()]['variant_id'] = $cartItem->getProductId();
+            } else {
+                // product is bundle or something else, just add it as a normal item
+
+                $itemMap[$cartItem->getId()] = [
+                    'product_id' => $cartItem->getProductId(),
+                    'price' => $cartItem->getPrice(),
+                    'total' => $cartItem->getRowTotal(),
+                    'name' => $cartItem->getName()
+                ];
+            }
+        }
+
+        return array_values($itemMap);
+    }
+
     /**
      * @return json - The contents of the cart as a json string.
      */
     public function getCartJson()
     {
-        $cartItems = Mage::getModel('checkout/cart')->getItems();
-        if (empty($cartItems)) {
-          return "[]";
-        }
-        return json_encode($cartItems->getData());
+        $quote = Mage::getSingleton('checkout/session')->getQuote();
+        $data = [
+            'currency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
+            'total' => $quote->getGrandTotal(),
+        ];
+
+        $data['items'] = $this->serializeQuoteItems($quote->getItemsCollection());
+
+        return json_encode($data);
     }
 
     /**
@@ -160,7 +218,7 @@ class Fera_Aiconnector_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getDebugJs() {
         if ($this->isDebugMode()) {
-            return "window.__bsioDebugMode = true;";
+            return "window.feraDebugMode = true;";
         }
         return "";
     }

@@ -1,0 +1,27 @@
+<!--// BEGIN Fera.ai Integration Code //-->
+    <script>
+        window.feraStandaloneMode = true;
+        window.fera = window.fera || [];
+        <?php echo Mage::helper('fera_ai')->getDebugJs(), PHP_EOL;?>
+        window.fera.push('configure', {
+            store_pk: "<?php echo Mage::helper('fera_ai')->getPublicKey(); ?>", 
+            api_url: "<?php echo Mage::helper('fera_ai')->getApiUrl(); ?>"
+        });
+        window.fera.push('loadPlatformAdapter', "magento");
+        <?php $cust = Mage::getSingleton('customer/session')->getCustomer() ?>
+        <?php if ($cust->getId()): ?>
+            <?php
+                $shopperData = [
+                  'customer_id' => $cust->getId(),
+                  'email' => $cust->getEmail(),
+                  'name' => $cust->getName(),
+                ];
+            ?>
+            window.fera.push('setShopper', <?php echo json_encode($shopperData); ?>);
+        <?php endif; ?>
+        window.fera.push('setCart', <?php echo Mage::helper('fera_ai')->getCartJson(); ?>);
+    </script>
+    <?php echo $this->getChildHtml('fera_ai.footer.product.view'); ?>
+    <?php echo $this->getChildHtml('fera_ai.footer.checkout.success'); ?>
+    <script async type="application/javascript" src="<?php echo Mage::helper('fera_ai')->getJsUrl(); ?>"></script>
+<!--// END Fera.ai Integration Code //-->

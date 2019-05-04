@@ -2,25 +2,29 @@
 <layout version="1.1.0">
     <fera_ai_footer>
         <reference name="before_body_end" >
-            <block type="core/template" name="fera_ai.footer" template="feraai/footer.phtml"></block>
+            <block type="core/template" name="fera_ai.footer" template="fera/ai/footer.phtml"></block>
         </reference>
     </fera_ai_footer>
 
     <catalog_product_view>
         <reference name="fera_ai.footer" >
-            <block type="fera_ai/footer_product_view" name="fera_ai.footer.product.view" template="feraai/footer/product/view.phtml"></block>
+            <block type="fera_ai/footer_product_view" name="fera_ai.footer.product.view" template="fera/ai/footer/product/view.phtml"></block>
+        </reference>
+
+        <reference name="product.info.extrahint" >
+            <block type="catalog/product_view" name="fera_ai.footer.product.view.under_add_to_cart" template="fera/ai/footer/product/view/under_add_to_cart.phtml"></block>
         </reference>
     </catalog_product_view>
 
     <checkout_multishipping_success>
         <reference name="fera_ai.footer" >
-            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="feraai/footer/checkout/success.phtml"></block>
+            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="fera/ai/footer/checkout/success.phtml"></block>
         </reference>
     </checkout_multishipping_success>
 
     <checkout_onepage_success>
         <reference name="fera_ai.footer" >
-            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="feraai/footer/checkout/success.phtml"></block>
+            <block type="fera_ai/footer_checkout_success" name="fera_ai.footer.checkout.success" template="fera/ai/footer/checkout/success.phtml"></block>
         </reference>
     </checkout_onepage_success>
 

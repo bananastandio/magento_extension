@@ -2,13 +2,13 @@
 <config>
   <tabs>
     <fera_ai translate="label" module="fera_ai">
-      <label>Fera.ai</label>
+      <label>Fera Commerce</label>
       <sort_order>100</sort_order>
     </fera_ai>
   </tabs>
   <sections>
     <fera_ai translate="label" module="fera_ai">
-      <label>Fera Settings</label>
+      <label>Fera.ai</label>
       <tab>fera_ai</tab>
       <sort_order>1000</sort_order>
       <show_in_default>1</show_in_default>
@@ -27,7 +27,7 @@
           <fields>
             <public_key translate="label">
               <label>Public Key: </label>
-              <frontend_type>obscure</frontend_type>
+              <frontend_type>text</frontend_type>
               <sort_order>20</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>

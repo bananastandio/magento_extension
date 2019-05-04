@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Fera_Aiconnector>
-            <version>1.1.0</version>
-        </Fera_Aiconnector>
+        <Fera_Ai>
+            <version>1.1.2</version>
+        </Fera_Ai>
     </modules>
     <global>
         <models>
             <fera_ai>
-                <class>Fera_Aiconnector_Model</class>
+                <class>Fera_Ai_Model</class>
             </fera_ai>
         </models>
         <blocks>
             <fera_ai>
-                <class>Fera_Aiconnector_Block</class>
+                <class>Fera_Ai_Block</class>
             </fera_ai>
         </blocks>
         <helpers>
             <fera_ai>
-                <class>Fera_Aiconnector_Helper</class>
+                <class>Fera_Ai_Helper</class>
             </fera_ai>
         </helpers>
     </global>
@@ -30,6 +30,15 @@
                 </fera_ai>
             </updates>
         </layout>
+        <routers>
+            <fera_ai>
+                <use>standard</use>
+                <args>
+                    <module>Fera_Ai</module>
+                    <frontName>fera_ai</frontName>
+                </args>
+            </fera_ai>
+        </routers>
     </frontend>
     <adminhtml>
         <acl>
