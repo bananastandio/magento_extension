@@ -214,7 +214,7 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
         $quote = Mage::getSingleton('checkout/session')->getQuote();
         $data = [
             'currency' => Mage::app()->getStore()->getCurrentCurrencyCode(),
-            'total' => $quote->getGrandTotal(),
+            'total' => $quote->getTotal(),
         ];
 
         $data['items'] = $this->serializeQuoteItems($quote->getItemsCollection());
