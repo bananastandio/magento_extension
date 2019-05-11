@@ -59,9 +59,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_SERVER['FERA_AI_PUBLIC_KEY'])) {
             return $_SERVER['FERA_AI_PUBLIC_KEY'];
         }
-        if (isset($_ENV['FERA_AI_PUBLIC_KEY'])) {
-            return $_ENV['FERA_AI_PUBLIC_KEY'];
-        }
         return Mage::getStoreConfig('fera_ai/fera_ai_group/public_key');
     }
 
@@ -74,9 +71,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_SERVER['FERA_AI_SECRET_KEY'])) {
             return $_SERVER['FERA_AI_SECRET_KEY'];
         }
-        if (isset($_ENV['FERA_AI_SECRET_KEY'])) {
-            return $_ENV['FERA_AI_SECRET_KEY'];
-        }
         return Mage::getStoreConfig('fera_ai/fera_ai_group/secret_key');
     }
 
@@ -84,9 +78,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if (isset($_SERVER['FERA_AI_ENABLED'])) {
             return $_SERVER['FERA_AI_ENABLED'] == '1';
-        }
-        if (isset($_ENV['FERA_AI_ENABLED'])) {
-            return $_ENV['FERA_AI_ENABLED'] == '1';
         }
 
         if (!$this->isConfigured()) {
@@ -116,9 +107,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
         if (isset($_SERVER['FERA_AI_API_URL'])) {
             return $_SERVER['FERA_AI_API_URL'];
         }
-        if (isset($_ENV['FERA_AI_API_URL'])) {
-            return $_ENV['FERA_AI_API_URL'];
-        }
 
         $urlFromConfig = Mage::getStoreConfig('fera_ai/fera_ai_group/api_url');
         if ($urlFromConfig) {
@@ -135,9 +123,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if (isset($_SERVER['FERA_AI_JS_URL'])) {
             return $_SERVER['FERA_AI_JS_URL'];
-        }
-        if (isset($_ENV['FERA_AI_JS_URL'])) {
-            return $_ENV['FERA_AI_JS_URL'];
         }
         
         $urlFromConfig = Mage::getStoreConfig('fera_ai/fera_ai_group/js_url');
@@ -156,9 +141,6 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
     {
         if (isset($_SERVER['FERA_AI_DEBUG_MODE'])) {
             return $_SERVER['FERA_AI_DEBUG_MODE'] == '1';
-        }
-        if (isset($_ENV['FERA_AI_DEBUG_MODE'])) {
-            return $_ENV['FERA_AI_DEBUG_MODE'] == '1';
         }
         return Mage::getStoreConfigFlag('fera_ai/general/debug_mode');
     }

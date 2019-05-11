@@ -13,7 +13,8 @@ class Fera_Ai_InstallationController extends Mage_Core_Controller_Front_Action
             $params = $this->getRequest()->getParams();
 
             if (Mage::getStoreConfig('fera_ai/fera_ai_group/secret_key') != $params['sk']) {
-                die("Invalid key");
+                $this->getResponse()->setBody("Invalid key");
+                return $this;
             }
 
             Mage::app()->cleanCache();
