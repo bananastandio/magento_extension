@@ -130,7 +130,7 @@ class Fera_Ai_Helper_Data extends Mage_Core_Helper_Abstract
             return $urlFromConfig;
         }
 
-        return "https://cdn.fera.ai/js/fera.js";
+        return "https://cdn.jsdelivr.net/gh/feracommerce/ferajs@latest/dist/fera.js";
     }
 
     /**
